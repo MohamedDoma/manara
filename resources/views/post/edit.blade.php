@@ -58,7 +58,6 @@
                                         {!! Form::textarea('post_body', $post->post_body, ['id'=>"summernote", 'class'=> 'form-control',]) !!}
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                         <hr class="my-4" />
@@ -109,8 +108,25 @@
 @push('scripts')
 <script src="{{ asset('assets/js/summernote-bs4.min.js') }}"></script>
 <script src="{{ asset('vendor/laravel-filemanager/js/stand-alone-button.js') }}"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
+<script>
+    jQuery(document).ready(function() {
+        jQuery('#summernote').summernote({
+            height: 150,
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']]
+              ]
+
+        });
+        jQuery('#uploadFile').filemanager('file');
+    });
+  </script>
 <script>
     $(document).ready(function() 
     {
@@ -138,22 +154,4 @@
     });
 </script>
 
-<script>
-    jQuery(document).ready(function() {
-        jQuery('#summernote').summernote({
-            height: 150,
-            toolbar: [
-                // [groupName, [list of button]]
-                ['style', ['bold', 'italic', 'underline', 'clear']],
-                ['font', ['strikethrough', 'superscript', 'subscript']],
-                ['fontsize', ['fontsize']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['height', ['height']]
-              ]
-
-        });
-        jQuery('#uploadFile').filemanager('file');
-    });
-  </script>
 @endpush
