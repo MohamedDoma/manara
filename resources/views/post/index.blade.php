@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @push('pg_btn')
-@can('create-post')
-    <a href="{{ route('post.create') }}" class="btn btn-sm btn-neutral">اضافة اثر جديد</a>
-@endcan
+    @can('create-post')
+        <a href="{{ route('post.create') }}" class="btn btn-sm btn-neutral">اضافة اثر جديد</a>
+    @endcan
 @endpush
 @section('content')
     <div class="row">
@@ -14,13 +14,13 @@
                             <h3 class="mb-0">جميع الاثار</h3>
                         </div>
                         <div class="col-lg-4">
-                    {!! Form::open(['route' => 'post.index', 'method'=>'get']) !!}
-                        <div class="form-group mb-0">
-                        {{ Form::text('search', request()->query('search'), ['class' => 'form-control form-control-sm', 'placeholder'=>'البحث']) }}
-                    </div>
+                            {!! Form::open(['route' => 'post.index', 'method'=>'get']) !!}
+                            <div class="form-group mb-0">
+                                {{ Form::text('search', request()->query('search'), ['class' => 'form-control form-control-sm', 'placeholder'=>'البحث']) }}
+                            </div>
 
-                    {!! Form::close() !!}
-                </div>
+                            {!! Form::close() !!}
+                        </div>
                     </div>
                 </div>
                 <div class="card-body p-0">
@@ -42,11 +42,11 @@
                                     <tr>
                                         <th scope="row">
                                             <div class="mx-w-440 d-flex flex-wrap">
-                                                {{$post->post_title }}
+                                                {{ $post->post_title }}
                                             </div>
                                         </th>
                                         <td class="budget">
-                                            {{$post->category->category_name}}
+                                            {{ $post->category->category_name }}
                                         </td>
                                         <td>
                                             @if($post->status)
@@ -61,32 +61,32 @@
                                         <td>
                                             <div class="avatar-group">
                                                 @if ($post->featured_image)
-                                                <img alt="Image placeholder"
-                                                    class="avatar avatar-xl"
-                                                    data-toggle="tooltip" data-original-title="{{$post->post_title}}"
-                                                    src="{{ asset($post->featured_image) }}">
+                                                    <img alt="Image placeholder"
+                                                         class="avatar avatar-xl"
+                                                         data-toggle="tooltip" data-original-title="{{$post->post_title}}"
+                                                         src="{{ asset($post->featured_image) }}">
                                                 @endif
                                             </div>
                                         </td>
                                         <td class="text-center">
                                             @can('destroy-post')
-                                            {!! Form::open(['route' => ['post.destroy', $post],'method' => 'delete',  'class'=>'d-inline-block dform']) !!}
+                                                {!! Form::open(['route' => ['post.destroy', $post],'method' => 'delete',  'class'=>'d-inline-block dform']) !!}
                                             @endcan
                                             @can('view-post')
-                                            <a class="btn btn-primary btn-sm m-1" data-toggle="tooltip" data-placement="top" title="عرض" href="{{route('post.show', $post)}}">
-                                                <i class="fa fa-eye" aria-hidden="true"></i>
-                                            </a>
+                                                <a class="btn btn-primary btn-sm m-1" data-toggle="tooltip" data-placement="top" title="عرض" href="{{route('post.show', $post)}}">
+                                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                                </a>
                                             @endcan
                                             @can('update-post')
-                                            <a class="btn btn-info btn-sm m-1" data-toggle="tooltip" data-placement="top" title="تعديل" href="{{route('post.edit',$post)}}">
-                                                <i class="fa fa-edit" aria-hidden="true"></i>
-                                            </a>
+                                                <a class="btn btn-info btn-sm m-1" data-toggle="tooltip" data-placement="top" title="تعديل" href="{{route('post.edit',$post)}}">
+                                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                                </a>
                                             @endcan
                                             @can('destroy-post')
                                                 <button type="submit" class="btn delete btn-danger btn-sm m-1" data-toggle="tooltip" data-placement="top" title="حذف" href="">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
-                                            {!! Form::close() !!}
+                                                {!! Form::close() !!}
                                             @endcan
                                         </td>
                                     </tr>

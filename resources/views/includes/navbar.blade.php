@@ -29,7 +29,7 @@
                 <!-- Nav items -->
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link {{ (request()->is('home*')) ? 'active' : '' }}" href="{{route('home')}}">
+                        <a class="nav-link {{ (request()->is('dashboard*')) ? 'active' : '' }}" href="{{route('dashboard')}}">
                             <i class="ni ni-shop text-primary"></i>
                             <span class="nav-link-text">الرئيسية</span>
                         </a>

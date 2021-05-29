@@ -24,6 +24,7 @@ Route::group(['middleware' => ['auth','verified']], function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
 
+    Route::get('/dashboard','HomeController@admin')->name('dashboard');
     Route::get('/components', function(){
         return view('components');
     })->name('components');
@@ -53,4 +54,7 @@ Route::group(['middleware' => ['auth','verified']], function () {
     Route::get('media', function (){
         return view('media.index');
     })->name('media.index');
+
+    Route::get('map','Homecontroller@map')->name('website.map');
+    Route::get('qr','Homecontroller@qr')->name('website.qr');
 });
