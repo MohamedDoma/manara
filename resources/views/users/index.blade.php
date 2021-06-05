@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @push('pg_btn')
 @can('create-user')
-    <a href="{{ route('users.create') }}" class="btn btn-sm btn-neutral">Create New User</a>
+    <a href="{{ route('users.create') }}" class="btn btn-sm btn-neutral">إنشاء مستخدم جديد</a>
 @endcan
 @endpush
 @section('content')
@@ -11,7 +11,7 @@
                 <div class="card-header bg-transparent">
                     <div class="row">
                         <div class="col-lg-8">
-                            <h3 class="mb-0">All Users</h3>
+                            <h3 class="mb-0">جميع المستخدمين</h3>
                         </div>
                         <div class="col-lg-4">
                     {!! Form::open(['route' => 'users.index', 'method'=>'get']) !!}
@@ -28,12 +28,12 @@
                             <table class="table table-hover align-items-center">
                                 <thead class="thead-light">
                                 <tr>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Verified at</th>
-                                    <th scope="col">Photo</th>
-                                    <th scope="col" class="text-center">Action</th>
+                                    <th scope="col">الاسم</th>
+                                    <th scope="col">البريد الإلكتروني</th>
+                                    <th scope="col">حالة</th>
+                                    <th scope="col">تم التحقق منه في</th>
+                                    <th scope="col">صورة</th>
+                                    <th scope="col" class="text-center">عمل</th>
                                 </tr>
                                 </thead>
                                 <tbody class="list">
@@ -47,9 +47,9 @@
                                         </td>
                                         <td>
                                             @if($user->status)
-                                                <span class="badge badge-pill badge-lg badge-success">Active</span>
+                                                <span class="badge badge-pill badge-lg badge-success">نشيط</span>
                                             @else
-                                                <span class="badge badge-pill badge-lg badge-danger">Disabled</span>
+                                                <span class="badge badge-pill badge-lg badge-danger">إبطال</span>
                                             @endif
                                         </td>
                                         <td>
