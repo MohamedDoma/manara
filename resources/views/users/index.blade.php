@@ -72,17 +72,17 @@
                                             {!! Form::open(['route' => ['users.destroy', $user],'method' => 'delete',  'class'=>'d-inline-block dform']) !!}
                                             @endcan
                                             @can('view-user')
-                                            <a class="btn btn-primary btn-sm m-1" data-toggle="tooltip" data-placement="top" title="View and edit user details" href="{{route('users.show', $user)}}">
+                                            <a class="btn btn-primary btn-sm m-1" data-toggle="tooltip" data-placement="top" title="عرض وتحرير تفاصيل المستخدم" href="{{route('users.show', $user)}}">
                                                 <i class="fa fa-eye" aria-hidden="true"></i>
                                             </a>
                                             @endcan
                                             @can('update-user')
-                                            <a class="btn btn-info btn-sm m-1" data-toggle="tooltip" data-placement="top" title="Edit user details" href="{{route('users.edit',$user)}}">
+                                            <a class="btn btn-info btn-sm m-1" data-toggle="tooltip" data-placement="top" title="تحرير تفاصيل المستخدم" href="{{route('users.edit',$user)}}">
                                                 <i class="fa fa-edit" aria-hidden="true"></i>
                                             </a>
                                             @endcan
                                             @can('destroy-user')
-                                                <button type="submit" class="btn delete btn-danger btn-sm m-1" data-toggle="tooltip" data-placement="top" title="Delete user" href="">
+                                                <button type="submit" class="btn delete btn-danger btn-sm m-1" data-toggle="tooltip" data-placement="top" title="مسح المستخدم" href="">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             {!! Form::close() !!}

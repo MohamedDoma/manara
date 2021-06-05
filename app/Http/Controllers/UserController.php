@@ -76,7 +76,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $title = "User Details";
+        $title = "بيانات المستخدم";
         $roles = Role::pluck('name', 'id');
         return view('users.show', compact('user','title', 'roles'));
     }
