@@ -44,7 +44,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $title = 'Create user';
+        $title = 'إنشاء مستخدم';
         $roles = Role::pluck('name', 'id');
         return view('users.create', compact('roles', 'title'));
     }
