@@ -33,7 +33,7 @@ class UserController extends Controller
         }else{
             $users= User::paginate(setting('record_per_page', 15));
         }
-        $title =  'Manage Users';
+        $title =  'ادارة المستخدمين';
         return view('users.index', compact('users','title'));
     }
 
@@ -89,7 +89,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $title = "User Details";
+        $title = "بيانات المستخدم";
         $roles = Role::pluck('name', 'id');
         return view('users.edit', compact('user','title', 'roles'));
     }
@@ -134,7 +134,7 @@ class UserController extends Controller
 
     public function profile(User $user)
     {
-        $title = 'Edit Profile';
+        $title = 'تعديل الملف الشخصي';
         return view('users.profile', compact('title','user'));
     }
     public function profileUpdate(UserUpdateRequest $request, User $user)
