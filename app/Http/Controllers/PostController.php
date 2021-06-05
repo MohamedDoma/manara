@@ -87,8 +87,8 @@ class PostController extends Controller
     {
         $post->with(['category','user','sections']);
         $post->increment('views');
-        $posts = Post::where('status',1)->take(3)->get();
-        return view('website.post')->with('post',$post)->with('posts',$posts);
+        $related = Post::where('status',1)->take(3)->get();
+        return view('website.post')->with('post',$post)->with('related',$related);
     }
 
     /**
