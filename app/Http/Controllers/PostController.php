@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Http\Requests\PostRequest;
 use App\Post;
+use App\Section;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -56,11 +57,22 @@ class PostController extends Controller
     public function store(PostRequest $request)
     {
         $request->merge(['user_id' => Auth::user()->id]);
-        $post = $request->except('featured_image');
+        $post = $request->except('featured_image','section_title','section_body');
         if ($request->featured_image) {
             $post['featured_image'] = parse_url($request->featured_image, PHP_URL_PATH);
         }
-        Post::create($post);
+
+        $sections = [];
+
+        foreach($request->get('section_body') as $key => $section){
+            $sec = new Section(['content' => $section ]);
+            $sec->type = 'p';
+            $sections[] = $sec;
+        }
+
+        $new_post = Post::create($post);
+        $new_post->sections()->saveMany($sections);
+
         flash('Post created successfully!')->success();
         return redirect()->route('post.index');
     }
@@ -73,7 +85,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $post->with(['category','user']);
+        $post->with(['category','user','sections']);
         $posts = Post::where('status',1)->take(3)->get();
         return view('website.post')->with('post',$post)->with('posts',$posts);
     }
@@ -87,7 +99,7 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $title = "Post Details";
-        $post->with(['category','user']);
+        $post->with(['category','user','sections']);
         $categories = Category::pluck('category_name', 'id');
         return view('post.edit', compact('title', 'categories', 'post'));
     }
@@ -101,11 +113,23 @@ class PostController extends Controller
      */
     public function update(PostRequest $request, Post $post)
     {
-        $postdata = $request->except('featured_image');
+        $postdata = $request->except('featured_image','section_title','section_body');
         if ($request->featured_image) {
             $postdata['featured_image'] = parse_url($request->featured_image, PHP_URL_PATH);
         }
+
+        $sections = [];
+
+        foreach($request->get('section_body') as $key => $section){
+            $sec = new Section(['content' => $section ]);
+            $sec->type = 'p';
+            $sections[] = $sec;
+        }
+
+
         $post->update($postdata);
+        $post->sections()->delete();
+        $post->sections()->saveMany($sections);
         flash('Post updated successfully!')->success();
         return redirect()->route('post.index');
     }

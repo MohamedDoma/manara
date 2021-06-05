@@ -34,6 +34,6 @@ class Post extends Model
     }
     public function sections()
     {
-        $this->hasMany(Section::class);
+        return $this->hasMany(Section::class);
     }
 }
