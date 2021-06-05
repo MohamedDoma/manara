@@ -36,8 +36,8 @@
                                             </span>
                                             <input id="thumbnail" class="form-control d-none" type="text" name="featured_image">
                                         </div>
+                                    </div>
                                 </div>
-                            </div>
 
                                         <div class="col-md-2">
                                             @if ($post->featured_image)

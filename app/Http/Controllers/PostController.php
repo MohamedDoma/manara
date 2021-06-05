@@ -74,6 +74,8 @@ class PostController extends Controller
     public function show(Post $post)
     {
         $post->with(['category','user']);
+        
+        $post->increment('views');
         $posts = Post::where('status',1)->take(3)->get();
         return view('website.post')->with('post',$post)->with('posts',$posts);
     }
