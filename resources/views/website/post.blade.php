@@ -69,11 +69,12 @@
             <div class="col-md-12 text-center p-4" data-aos="fade-up">
                 <p>
                     {{ $post->post_body }}</p>
-                <h2 class="p-4">رجب الكويس</h2>
-                <p>
-                    Al Azi performances strengthen communal bonds and traditionally served as an important means of passing down traditions, knowledge, and the Bedouin way of relating to nature.
-                    Drawing inspiration from both colloquial Nabati and classic Arabic poetry, the main theme of Al Azi poems is pride in one’s family, tribe or rulers. In Al Azi verse, the poet speaks about generosity, courage and other qualities that exemplify the greatness of the poem’s subject.
-                </p>
+                    @foreach($post->sections as $section)
+                        <h2 class="p-4">{{$section->post_id}}</h2>
+                        <p>
+                           {{ $section->content}}
+                        </p>
+                @endforeach
             </div>
             <div class="col-md-12 text-center" data-aos="fade-up">
                 <h1>الصور</h1>
