@@ -43,7 +43,7 @@ class SettingController extends Controller
 
     }
     public function activity(Request $request){
-        $title= 'Activity Logs';
+        $title= 'سجلات الأنشطة';
         activity('activity')
             ->causedBy(Auth::user())
             ->log('view');

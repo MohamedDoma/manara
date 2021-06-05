@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @push('pg_btn')
     @can('update-user')
-        <a class="btn btn-info btn-sm m-1" data-toggle="tooltip" data-placement="top" title="Edit user details" href="{{route('users.edit',$user)}}">
-            <i class="fa fa-edit" aria-hidden="true"></i> Edit User
+        <a class="btn btn-info btn-sm m-1" data-toggle="tooltip" data-placement="top" title="تحرير تفاصيل المستخدم" href="{{route('users.edit',$user)}}">
+            <i class="fa fa-edit" aria-hidden="true"></i> تحرير المستخدم
         </a>
     @endcan
 @endpush
@@ -13,7 +13,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-1">
-                            Name
+                            الإسم
                         </div>
                         <div class="col-sm-3">
                             <strong>{{ $user->name }}</strong>
@@ -28,7 +28,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-1">
-                            Email
+                            البريد الإلكتروني
                         </div>
                         <div class="col-sm-3">
                             <strong>{{ $user->email }}</strong>
@@ -36,7 +36,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-1">
-                            Phone
+                            رقم الهاتف
                         </div>
                         <div class="col-sm-3">
                             <strong>{{ $user->phone_number }}</strong>
@@ -44,7 +44,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-1">
-                            Role
+                            الدور
                         </div>
                         <div class="col-sm-3">
                             @foreach ($user->roles as $role)
@@ -54,7 +54,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-1">
-                            Status
+                            الحالة
                         </div>
                         <div class="col-sm-3">
                             {{ $user->status ? 'Active' : 'Disable'}}
