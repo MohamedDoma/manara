@@ -9,6 +9,8 @@ use App\Section;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Keyword;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -87,7 +89,12 @@ class PostController extends Controller
     {
         $post->with(['category','user','sections']);
         $post->increment('views');
+        $keywords = Keyword::where('post_id',$post->id)->orWhere('post_id',null)->get();
         $related = Post::where('status',1)->take(3)->get();
+        foreach ($keywords as $keyword)
+        {
+            $post->post_body = Str::of($post->post_body)->replace($keyword->word,"<span class='keyword-highlight' data-content='$keyword->content'>$keyword->word</span>");
+        }
         return view('website.post')->with('post',$post)->with('related',$related);
     }
 

@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use App\Section;
+use App\Keyword;
 
 class Post extends Model
 {
@@ -35,5 +36,9 @@ class Post extends Model
     public function sections()
     {
         return $this->hasMany(Section::class);
+    }
+    public function keywords()
+    {
+        return $this->hasMany(Keyword::class);
     }
 }
