@@ -2,10 +2,10 @@
 
 namespace App;
 
+use App\Keyword;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use App\Section;
-use App\Keyword;
 
 class Post extends Model
 {
@@ -40,5 +40,9 @@ class Post extends Model
     public function keywords()
     {
         return $this->hasMany(Keyword::class);
+    }
+    public function images(){
+        return $this->hasMany(Image::class);
+
     }
 }
