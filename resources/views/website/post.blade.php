@@ -33,17 +33,16 @@
                         </p>
                 @endforeach
             </div>
+            @if($post->images)
             <div class="col-md-12 text-center" data-aos="fade-up">
                 <h1>الصور</h1>
                 <div class="owl-carousel owl-theme">
-                    <img src="http://lokeshdhakar.com/projects/lightbox2/images/image-3.jpg" />
-                    <img src="http://lokeshdhakar.com/projects/lightbox2/images/image-2.jpg" />
-                    <img src="http://lokeshdhakar.com/projects/lightbox2/images/image-3.jpg" />
-                    <img src="http://lokeshdhakar.com/projects/lightbox2/images/image-2.jpg" />
-                    <img src="http://lokeshdhakar.com/projects/lightbox2/images/image-3.jpg" />
-                    <img src="http://lokeshdhakar.com/projects/lightbox2/images/image-2.jpg" />
+                    @foreach($post->images as $image)
+                        <img src="{{$image->image}}" />
+                    @endforeach
                 </div>
             </div>
+            @endif
             @if($post->know)
                 <div class="col-md-12 text-center p-0 " data-aos="fade-up">
                     <h1 class="p-3">هل تعلم</h1>
