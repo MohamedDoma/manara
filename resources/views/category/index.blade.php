@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @push('pg_btn')
 @can('create-category')
-    <a href="{{ route('category.create') }}" class="btn btn-sm btn-neutral">Create New Category</a>
+    <a href="{{ route('category.create') }}" class="btn btn-sm btn-neutral">إنشاء فئة جديدة</a>
 @endcan
 @endpush
 @section('content')
@@ -16,7 +16,7 @@
                         <div class="col-lg-4">
                     {!! Form::open(['route' => 'users.index', 'method'=>'get']) !!}
                         <div class="form-group mb-0">
-                        {{ Form::text('search', request()->query('search'), ['class' => 'form-control form-control-sm', 'placeholder'=>'Search users']) }}
+                        {{ Form::text('search', request()->query('search'), ['class' => 'form-control form-control-sm', 'placeholder'=>'بحث المستخدمين']) }}
                     </div>
                     {!! Form::close() !!}
                 </div>
@@ -60,12 +60,12 @@
                                             @endcan
 
                                             @can('update-category')
-                                            <a class="btn btn-info btn-sm m-1" data-toggle="tooltip" data-placement="top" title="Edit category details" href="{{route('category.edit',$category)}}">
+                                            <a class="btn btn-info btn-sm m-1" data-toggle="tooltip" data-placement="top" title="تحرير تفاصيل الفئة" href="{{route('category.edit',$category)}}">
                                                 <i class="fa fa-edit" aria-hidden="true"></i>
                                             </a>
                                             @endcan
                                             @can('destroy-category')
-                                                <button type="submit" class="btn delete btn-danger btn-sm m-1" data-toggle="tooltip" data-placement="top" title="Delete category" href="">
+                                                <button type="submit" class="btn delete btn-danger btn-sm m-1" data-toggle="tooltip" data-placement="top" title="حذف الفئة" href="">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             {!! Form::close() !!}
@@ -98,7 +98,7 @@
                 jQuery.confirm({
                     icon: 'fas fa-wind-warning',
                     closeIcon: true,
-                    title: 'Are you sure!',
+                    title: 'هل أنت واثق!',
                     content: 'You can not undo this action.!',
                     type: 'red',
                     typeAnimated: true,

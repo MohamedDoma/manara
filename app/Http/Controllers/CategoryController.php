@@ -29,7 +29,7 @@ class CategoryController extends Controller
         }else{
             $categories = Category::with(['user'])->paginate(setting('record_per_page', 15));
         }
-        $title =  'Manage Categories';
+        $title =  'إدارة الفئات';
         return view('category.index', compact('categories','title'));
     }
 
@@ -40,7 +40,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $title = 'Create category';
+        $title = 'إنشاء فئة';
         return view('category.create', compact('title'));
     }
 
@@ -77,7 +77,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        $title = "Category Details";
+        $title = "تفاصيل الفئة";
         $category->with('user');
         return view('category.edit', compact('title', 'category'));
     }
