@@ -56,17 +56,7 @@
                     <div class="row ccc">
                         <a href="#" class="btn btn-sm btn-neutral add">اضافة قسم</a>
 
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                {{ Form::label('post_title', 'عنوان القسم', ['class' => 'form-control-label']) }}
-                                {{ Form::text('post_title', "", ['class' => 'form-control']) }}
-                            </div>
-                            
-                            <div class="form-group">
-                                {{ Form::label('post_body', 'محتوى القسم', ['class' => 'form-control-label']) }}
-                                {!! Form::textarea('post_body', "", ['id'=>"summernote", 'class'=> 'form-control',]) !!}
-                            </div>
-                        </div>
+
                     </div>
                 </div>
 
@@ -117,7 +107,7 @@
 </script>
 
 <script>
-    $(document).ready(function() 
+    $(document).ready(function()
     {
         var max_fields = 100;
         var wrapper = $(".ccc");
@@ -131,7 +121,7 @@
             if(x < max_fields)
             {
                 x++;
-                $(wrapper).append('<div class="col-lg-12"> <div class="form-group"> {{ Form::label("post_title", "عنوان القسم", ["class" => "form-control-label"]) }} {{ Form::text("post_title", "", ["class" => "form-control"]) }} </div> <div class="form-group"> {{ Form::label("post_body", "محتوى القسم", ["class" => "form-control-label"]) }} {!! Form::textarea("post_body", "", ["id"=>"summernote", "class"=> "form-control",]) !!} </div> <a href="#" class="remove_field">Remove</a> </div> ');
+                $(wrapper).append('<div class="col-lg-12"> <div class="form-group"> {{ Form::label("section_title", "عنوان القسم", ["class" => "form-control-label"]) }} {{ Form::text("section_title[]", "", ["class" => "form-control"]) }} </div> <div class="form-group"> {{ Form::label("section_body", "محتوى القسم", ["class" => "form-control-label"]) }} {!! Form::textarea("section_body[]", "", ["id"=>"summernote", "class"=> "form-control",]) !!} </div> <a href="#" class="remove_field">Remove</a> </div> ');
             }
         });
 

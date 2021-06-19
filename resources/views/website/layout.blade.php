@@ -21,7 +21,7 @@
 
     <link rel="stylesheet" href="{{asset('website/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('website/css/lightbox.css')}}" >
-
+    @stack('styles')
 </head>
 <body>
 

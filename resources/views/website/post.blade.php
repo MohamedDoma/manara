@@ -9,21 +9,27 @@
         </div>
         <div class="container bg-white p-0" style="/*transform: translateY(-200px)*/">
             <div class="col-md-6 text-center p-4 d-flex justify-content-between" style="margin:0 auto;">
-                <button class="btn btn-primary">
-                    خيار
-                </button>
 
+                <a class="btn btn-primary" href="#about">
+                    نبذة
+                </a>
+                @foreach($post->sections as $section)
+                <a class="btn btn-primary" href="#{{$section->id}}">
+                    {{$section->title}}
+                </a>
+                @endforeach
             </div>
             <div class="col-md-12 text-center p-4" >
                 <h1>{{ $post->title }}</h1>
             </div>
             <div class="col-md-12 text-center p-4" data-aos="fade-up">
-                <p>
-                    {{ $post->post_body }}</p>
+                <p id="about">
+                    {!!  $post->post_body !!}
+                </p>
                     @foreach($post->sections as $section)
-                        <h2 class="p-4">{{$section->post_id}}</h2>
+                        <h2 id="{{$section->id}}" class="p-4">{{$section->title}}</h2>
                         <p>
-                           {{ $section->content}}
+                           {!! $section->content !!}
                         </p>
                 @endforeach
             </div>

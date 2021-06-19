@@ -65,13 +65,13 @@ class PostController extends Controller
         }
 
         $sections = [];
-
-        foreach($request->get('section_body') as $key => $section){
-            $sec = new Section(['content' => $section ]);
-            $sec->type = 'p';
-            $sections[] = $sec;
+        if($request->has('section_body')){
+            foreach($request->get('section_body') as $key => $section){
+                $sec = new Section(['content' => $section ]);
+                $sec->type = 'p';
+                $sections[] = $sec;
+            }
         }
-
         $new_post = Post::create($post);
         $new_post->sections()->saveMany($sections);
 
@@ -119,7 +119,7 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(PostRequest $request, Post $post)
+    public function update(Request $request, Post $post)
     {
         $postdata = $request->except('featured_image','section_title','section_body');
         if ($request->featured_image) {
@@ -127,11 +127,12 @@ class PostController extends Controller
         }
 
         $sections = [];
-
-        foreach($request->get('section_body') as $key => $section){
-            $sec = new Section(['content' => $section ]);
-            $sec->type = 'p';
-            $sections[] = $sec;
+        if($request->has('section_body')) {
+            foreach ($request->get('section_body') as $key => $section) {
+                $sec = new Section(['content' => $section]);
+                $sec->type = 'p';
+                $sections[] = $sec;
+            }
         }
 
 

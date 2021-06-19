@@ -142,12 +142,14 @@
                     <li class="nav-item">
                         <hr class="my-3">
                     </li>
+                    @canany(['view-role', 'create-role'])
                     <li class="nav-item">
                             <a class="nav-link active active-pro" href="{{route('components')}}">
                                 <i class="ni ni-send text-primary"></i>
                                 <span class="nav-link-text">Components</span>
                             </a>
                         </li>
+                    @endcan
                 </ul>
             </div>
         </div>
