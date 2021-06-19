@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Http\Requests\PostRequest;
+use App\Image;
 use App\Post;
 use App\Section;
 use Illuminate\Http\Request;
@@ -65,15 +66,23 @@ class PostController extends Controller
         }
 
         $sections = [];
-
-        foreach($request->get('section_body') as $key => $section){
-            $sec = new Section(['content' => $section ]);
-            $sec->type = 'p';
-            $sections[] = $sec;
+        if($request->has('section_body')){
+            foreach($request->get('section_body') as $key => $section){
+                $sec = new Section(['content' => $section ]);
+                $sec->type = 'p';
+                $sections[] = $sec;
+            }
         }
-
+        $images = [];
+        if($request->has('images')) {
+            foreach ($request->get('images') as $key => $image) {
+                $img = new Image(['image' => parse_url($image, PHP_URL_PATH)]);
+                $sections[] = $img;
+            }
+        }
         $new_post = Post::create($post);
         $new_post->sections()->saveMany($sections);
+        $new_post->images()->saveMany($images);
 
         flash('Post created successfully!')->success();
         return redirect()->route('post.index');
@@ -119,7 +128,7 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(PostRequest $request, Post $post)
+    public function update(Request $request, Post $post)
     {
         $postdata = $request->except('featured_image','section_title','section_body');
         if ($request->featured_image) {
@@ -127,17 +136,27 @@ class PostController extends Controller
         }
 
         $sections = [];
-
-        foreach($request->get('section_body') as $key => $section){
-            $sec = new Section(['content' => $section ]);
-            $sec->type = 'p';
-            $sections[] = $sec;
+        if($request->has('section_body')) {
+            foreach ($request->get('section_body') as $key => $section) {
+                $sec = new Section(['content' => $section]);
+                $sec->type = 'p';
+                $sections[] = $sec;
+            }
+        }
+        $images = [];
+        if($request->has('images')) {
+            foreach ($request->get('images') as $key => $image) {
+                $img = new Image(['image' => parse_url($image, PHP_URL_PATH)]);
+                $sections[] = $img;
+            }
         }
 
 
         $post->update($postdata);
         $post->sections()->delete();
         $post->sections()->saveMany($sections);
+        $post->images()->delete();
+        $post->images()->saveMany($images);
         flash('Post updated successfully!')->success();
         return redirect()->route('post.index');
     }

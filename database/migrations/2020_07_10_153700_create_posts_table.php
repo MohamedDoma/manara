@@ -25,6 +25,7 @@ class CreatePostsTable extends Migration
             $table->foreignId('user_id')
                     ->constrained()
                     ->onDelete('cascade');
+            $table->string('cords')->nullable();
             $table->timestamps();
         });
     }

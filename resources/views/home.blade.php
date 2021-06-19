@@ -31,7 +31,7 @@
                     <div class="row">
                         <div class="col">
                             <h5 class="card-title text-uppercase text-muted mb-0">عدد الاثار</h5>
-                            <span class="h2 font-weight-bold mb-0">10</span>
+                            <span class="h2 font-weight-bold mb-0">{{$posts->count()}}</span>
                         </div>
                         <div class="col-auto">
                             <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
@@ -40,7 +40,7 @@
                         </div>
                     </div>
                     <p class="mt-3 mb-0 text-sm">
-                        <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3</span>
+                        <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> {{$lastmonth_posts->count()}}</span>
                         <span class="text-nowrap">اثار جديدة</span>
                     </p>
                 </div>
@@ -97,77 +97,25 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th scope="row">
-                                قوس ماركوس
-                            </th>
-                            <td>
-                                4,569
-                            </td>
-                            <td>
-                                340
-                            </td>
-                            <td>
-                                <i class="fas fa-arrow-up text-success mr-3"></i> 46,53%
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                السوق البونيقي
-                            </th>
-                            <td>
-                                3,985
-                            </td>
-                            <td>
-                                319
-                            </td>
-                            <td>
-                                <i class="fas fa-arrow-down text-warning mr-3"></i> 46,53%
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                قوس تراجان
-                            </th>
-                            <td>
-                                3,513
-                            </td>
-                            <td>
-                                294
-                            </td>
-                            <td>
-                                <i class="fas fa-arrow-down text-warning mr-3"></i> 36,49%
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                قوس سبتيموس
-                            </th>
-                            <td>
-                                2,050
-                            </td>
-                            <td>
-                                147
-                            </td>
-                            <td>
-                                <i class="fas fa-arrow-up text-success mr-3"></i> 50,87%
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                الكنيسة
-                            </th>
-                            <td>
-                                1,795
-                            </td>
-                            <td>
-                                190
-                            </td>
-                            <td>
-                                <i class="fas fa-arrow-down text-danger mr-3"></i> 46,53%
-                            </td>
-                        </tr>
+                            @foreach($posts as $post)
+                                <tr>
+                                    <th scope="row">
+                                        {{$post->post_title}}
+                                    </th>
+                                    <td>
+                                        4,569
+                                    </td>
+                                    <td>
+                                        340
+                                    </td>
+                                    <td>
+                                        <i class="fas fa-arrow-up text-success mr-3"></i> 46,53%
+                                    </td>
+                                </tr>
+
+                            @endforeach
                         </tbody>
+                        {{$posts->links()}}
                     </table>
                 </div>
             </div>
