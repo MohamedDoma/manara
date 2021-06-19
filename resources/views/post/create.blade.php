@@ -56,7 +56,7 @@
                     <div class="row ccc">
                         <a href="#" class="btn btn-sm btn-neutral add">اضافة قسم</a>
 
-                        <div class="col-lg-12">
+                        <!-- <div class="col-lg-12">
                             <div class="form-group">
                                 {{ Form::label('post_title', 'عنوان القسم', ['class' => 'form-control-label']) }}
                                 {{ Form::text('post_title', "", ['class' => 'form-control']) }}
@@ -66,6 +66,28 @@
                                 {{ Form::label('post_body', 'محتوى القسم', ['class' => 'form-control-label']) }}
                                 {!! Form::textarea('post_body', "", ['id'=>"summernote", 'class'=> 'form-control',]) !!}
                             </div>
+                        </div> -->
+                    </div>
+                </div>
+
+                <hr class="my-4" />
+
+                <h6 class="heading-small text-muted mb-4">keyword</h6>
+
+                <div class="pl-lg-4">
+                    <div class="row kkk">
+                        <a href="#" class="btn btn-sm btn-neutral add_key">add keyword</a>
+
+                        <div class="col-lg-12">
+                            <!-- <div class="form-group">
+                                {{ Form::label('post_title', '', ['class' => 'form-control-label']) }}
+                                {{ Form::text('post_title', "", ['class' => 'form-control']) }}
+                            </div>
+                            
+                            <div class="form-group">
+                                {{ Form::label('post_title', '', ['class' => 'form-control-label']) }}
+                                {{ Form::text('post_title', "", ['class' => 'form-control']) }}
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -132,6 +154,32 @@
             {
                 x++;
                 $(wrapper).append('<div class="col-lg-12"> <div class="form-group"> {{ Form::label("post_title", "عنوان القسم", ["class" => "form-control-label"]) }} {{ Form::text("post_title", "", ["class" => "form-control"]) }} </div> <div class="form-group"> {{ Form::label("post_body", "محتوى القسم", ["class" => "form-control-label"]) }} {!! Form::textarea("post_body", "", ["id"=>"summernote", "class"=> "form-control",]) !!} </div> <a href="#" class="remove_field">Remove</a> </div> ');
+            }
+        });
+
+        $(wrapper).on("click", ".remove_field", function(e){
+            e.preventDefault();
+            $(this).parent('div').remove();
+            x--;
+        })
+    });
+</script>
+
+<script>
+    $(document).ready(function()
+    {
+        var max_keys = 100;
+        var wrapper = $(".kkk");
+        var add_key = $(".add_key");
+
+        var x = 1;
+
+        $(add_key).click(function(e){
+            e.preventDefault();
+            if(x < max_keys)
+            {
+                x++;
+                $(wrapper).append('<div class="col-lg-12"> <div class="form-group"> {{ Form::label("post_title", "", ["class" => "form-control-label"]) }}{{ Form::text("post_title", "", ["class" => "form-control"]) }}</div><div class="form-group">{{ Form::label("post_title", "", ["class" => "form-control-label"]) }}{{ Form::text("post_title", "", ["class" => "form-control"]) }} </div> <a href="#" class="remove_field">Remove</a> </div>')
             }
         });
 
