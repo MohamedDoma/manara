@@ -95,6 +95,38 @@
                 </div>
 
                 <hr class="my-4" />
+
+                <h6 class="heading-small text-muted mb-4">الصور</h6>
+                <div class="pl-lg-4">
+                    <div class="row ppp">
+                        <a href="#" class="btn btn-sm btn-neutral add_photo">اضافة صورة</a>
+
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {{ Form::label('featured_image', 'الصورة الرئيسية', ['class' => 'form-control-label d-block']) }}
+                                <div class="input-group">
+                                    <span class="input-group-btn">
+                                        <a id="uploadFile" data-input="thumbnail" data-preview="holder" class="btn btn-secondary">
+                                            <i class="fa fa-picture-o"></i> اضافة صورة
+                                        </a>
+                                    </span>
+                                    <input id="thumbnail" class="form-control d-none" type="text" name="featured_image">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <!-- <a href="#" target="_blank">
+                                <img alt="Image placeholder" class="avatar avatar-xl  " data-toggle="tooltip" data-original-title="" Logo="" src="">
+                            </a> -->
+                            
+                        </div>
+
+                    </div>
+                </div>
+                <hr class="my-4" />
+
                 <div class="pl-lg-4">
                     <div class="row">
                         <div class="col-md-12">
@@ -189,6 +221,30 @@
             e.preventDefault();
             $(this).parent('div').remove();
             x--;
+        })
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        var max_photo_field = 100;
+        var photo_wrapper = $(".ppp");
+        var add_photo_button = $(".add_photo");
+
+        var i = 1;
+
+        $(add_photo_button).click(function(e) {
+            e.preventDefault();
+            if (i < max_photo_field) {
+                i++;
+                $(photo_wrapper).append('<div class="col-md-2"> <div class="input-group"><span class="input-group-btn"><a id="uploadFile" data-input="thumbnail" data-preview="holder" class="btn btn-secondary"><i class="fa fa-picture-o"></i> اضافة صورة</a></span><input id="thumbnail" class="form-control d-none" type="text" name="featured_image"></div>  <a href="#" class="remove_photo_field">Remove</a> </div>');
+            }
+        });
+
+        $(photo_wrapper).on("click", ".remove_photo_field", function(e) {
+            e.preventDefault();
+            $(this).parent('div').remove();
+            i--;
         })
     });
 </script>
