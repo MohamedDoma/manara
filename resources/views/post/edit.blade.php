@@ -30,8 +30,8 @@
                                 {{ Form::label('featured_image', 'الصورة الرئيسية', ['class' => 'form-control-label d-block']) }}
                                 <div class="input-group">
                                     <span class="input-group-btn">
-                                        <a id="uploadFile" data-input="thumbnail" data-preview="placeholder" class="btn btn-secondary">
-                                            <i class="fa fa-picture-o"></i> اضافة صورة
+                                        <a id="uploadFile" data-input="thumbnail" data-preview="holder" class="btn btn-secondary">
+                                            <i class="fa fa-picture-o"></i> اختار صورة
                                         </a>
                                     </span>
                                     <input id="thumbnail" class="form-control d-none" type="text" name="featured_image">
@@ -41,9 +41,7 @@
 
                         <div class="col-md-2">
                             @if ($post->featured_image)
-                            <a href="{{ asset($post->featured_image) }}" target="_blank">
-                                <img alt="Image placeholder" class="avatar avatar-xl  " data-toggle="tooltip" data-original-title="{{ $post->name }} Logo" src="{{ asset($post->featured_image) }}">
-                            </a>
+                                <div id="holder"><img style="height: 5rem;" src="{{$post->featured_image}}"></div>
                             @endif
                         </div>
 
@@ -109,31 +107,52 @@
                     <div class="row ppp">
                         <a href="#" class="btn btn-sm btn-neutral add_photo">اضافة صورة</a>
 
-                        @foreach($post->sections as $section)
+                        @foreach($post->images as $key => $image)
 
                         <div class="col-md-4">
                             <div class="form-group">
-                                {{ Form::label('featured_image', 'الصورة الرئيسية', ['class' => 'form-control-label d-block']) }}
+                                {{ Form::label('featured_image', $key.'الصورة', ['class' => 'form-control-label d-block']) }}
                                 <div class="input-group">
                                     <span class="input-group-btn">
-                                        <a id="uploadFile" data-input="thumbnail" data-preview="holder" class="btn btn-secondary">
+                                        <a id="uploadFile{{$key}}" data-input="thumbnail{{$key}}" data-preview="holder{{$key}}" class="btn btn-secondary">
                                             <i class="fa fa-picture-o"></i> اضافة صورة
                                         </a>
                                     </span>
-                                    <input id="thumbnail" class="form-control d-none" type="text" name="featured_image">
+                                    <input id="thumbnail{{$key}}" class="form-control d-none" value="{{$image->image}}" type="text" name="images[]">
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-md-2">
-                            @if ($post->featured_image)
-                            <a href="{{ asset($post->featured_image) }}" target="_blank">
-                                <img alt="Image placeholder" class="avatar avatar-xl  " data-toggle="tooltip" data-original-title="{{ $post->name }} Logo" src="{{ asset($post->featured_image) }}">
-                            </a>
-                            @endif
+                                <div id="holder{{$key}}"><img style="height: 5rem;" src="{{$image->image}}"></div>
                         </div>
 
                         @endforeach
+                    </div>
+                </div>
+
+                <hr class="my-4" />
+
+                <h6 class="heading-small text-muted mb-4">الوحدة</h6>
+
+                <div class="pl-lg-4">
+                    <div class="row kkk">
+                        <a href="#" class="btn btn-sm btn-neutral add_key">اضافة وحدة</a>
+                        @if($post->keywords)
+                            @foreach($post->keywords as $keyword)
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    {{ Form::label("الوحدة", "", ["class" => "form-control-label"]) }}
+                                    {{ Form::text("keyword[]", $keyword->word, ["class" => "form-control"]) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ Form::label("الوحدة تعرض", "", ["class" => "form-control-label"]) }}
+                                    {{ Form::text("keyword_content[]", $keyword->content, ["class" => "form-control"]) }}
+                                </div>
+                                <a href="#" class="remove_field">Remove</a>
+                            </div>
+                            @endforeach
+                        @endif
                     </div>
                 </div>
 
@@ -182,6 +201,10 @@
 
         });
         jQuery('#uploadFile').filemanager('file');
+
+        @foreach($post->images as $key => $image)
+            jQuery('#uploadFile{{$key}}').filemanager('file');
+        @endforeach
     });
 </script>
 <script>
@@ -214,13 +237,13 @@
         var photo_wrapper = $(".ppp");
         var add_photo_button = $(".add_photo");
 
-        var i = 1;
+        var i = {{ sizeof($post->images) }};
 
         $(add_photo_button).click(function(e) {
             e.preventDefault();
             if (i < max_photo_field) {
                 i++;
-                $(photo_wrapper).append('<div class="col-md-2"> <div class="input-group"><span class="input-group-btn"><a id="uploadFile'+i+'" data-input="thumbnail'+i+'" data-preview="holder" class="btn btn-secondary"><i class="fa fa-picture-o"></i> اضافة صورة</a></span><input id="thumbnail'+i+'" class="form-control d-none" type="text" name="image[]"></div>  <a href="#" class="remove_photo_field">Remove</a> </div>');
+                $(photo_wrapper).append('<div class="col-md-2"> <div class="input-group"><span class="input-group-btn"><a id="uploadFile'+i+'" data-input="thumbnail'+i+'" data-preview="holder'+i+'" class="btn btn-secondary"><i class="fa fa-picture-o"></i> اضافة صورة</a></span><input id="thumbnail'+i+'" class="form-control d-none" type="text" name="images[]"></div>  <a href="#" class="remove_photo_field">Remove</a><div class="col-md-2"><div id="holder'+i+'"><img style="height: 5rem;" src="#"></div></div></div>');
                 $('#uploadFile'+i).filemanager('file');
             }
         });
@@ -232,5 +255,29 @@
         })
     });
 </script>
+<script>
+    $(document).ready(function()
+    {
+        var max_keys = 100;
+        var wrapper = $(".kkk");
+        var add_key = $(".add_key");
 
+        var x = 1;
+
+        $(add_key).click(function(e){
+            e.preventDefault();
+            if(x < max_keys)
+            {
+                x++;
+                $(wrapper).append('<div class="col-lg-12"> <div class="form-group"> {{ Form::label("الوحدة", "", ["class" => "form-control-label"]) }}{{ Form::text("keyword[]", "", ["class" => "form-control"]) }}</div><div class="form-group">{{ Form::label("الوحدة تعرض", "", ["class" => "form-control-label"]) }}{{ Form::text("keyword_content[]", "", ["class" => "form-control"]) }} </div> <a href="#" class="remove_field">Remove</a> </div>')
+            }
+        });
+
+        $(wrapper).on("click", ".remove_field", function(e){
+            e.preventDefault();
+            $(this).parent('div').remove();
+            x--;
+        })
+    });
+</script>
 @endpush

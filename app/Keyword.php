@@ -7,7 +7,8 @@ use App\Post;
 
 class Keyword extends Model
 {
-    public function post(){
+    public $fillable = ['word','content'];
+    public function post() {
         return $this->belongsTo(Post::class);
     }
 }

@@ -38,6 +38,10 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="col-md-2">
+                                <div id="holder"><img style="height: 5rem;" src="#"></div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
@@ -57,13 +61,13 @@
                         <a href="#" class="btn btn-sm btn-neutral add">اضافة قسم</a>
 
                         <!-- <div class="col-lg-12">
-   
-                        <!-- <div class="col-lg-12">
+
+                      <div class="col-lg-12">
                             <div class="form-group">
                                 {{ Form::label('post_title', 'عنوان القسم', ['class' => 'form-control-label']) }}
                                 {{ Form::text('post_title', "", ['class' => 'form-control']) }}
                             </div>
-                            
+
                             <div class="form-group">
                                 {{ Form::label('post_body', 'محتوى القسم', ['class' => 'form-control-label']) }}
                                 {!! Form::textarea('post_body', "", ['id'=>"summernote", 'class'=> 'form-control',]) !!}
@@ -74,18 +78,18 @@
 
                 <hr class="my-4" />
 
-                <h6 class="heading-small text-muted mb-4">keyword</h6>
+                <h6 class="heading-small text-muted mb-4">وحدة</h6>
 
                 <div class="pl-lg-4">
                     <div class="row kkk">
-                        <a href="#" class="btn btn-sm btn-neutral add_key">add keyword</a>
+                        <a href="#" class="btn btn-sm btn-neutral add_key"> اضافة وحدة</a>
 
                         <div class="col-lg-12">
                             <!-- <div class="form-group">
                                 {{ Form::label('post_title', '', ['class' => 'form-control-label']) }}
                                 {{ Form::text('post_title', "", ['class' => 'form-control']) }}
                             </div>
-                            
+
                             <div class="form-group">
                                 {{ Form::label('post_title', '', ['class' => 'form-control-label']) }}
                                 {{ Form::text('post_title', "", ['class' => 'form-control']) }}
@@ -100,28 +104,6 @@
                 <div class="pl-lg-4">
                     <div class="row ppp">
                         <a href="#" class="btn btn-sm btn-neutral add_photo">اضافة صورة</a>
-
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                {{ Form::label('featured_image', 'الصورة الرئيسية', ['class' => 'form-control-label d-block']) }}
-                                <div class="input-group">
-                                    <span class="input-group-btn">
-                                        <a id="uploadFile" data-input="thumbnail" data-preview="holder" class="btn btn-secondary">
-                                            <i class="fa fa-picture-o"></i> اضافة صورة
-                                        </a>
-                                    </span>
-                                    <input id="thumbnail" class="form-control d-none" type="text" name="featured_image">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <!-- <a href="#" target="_blank">
-                                <img alt="Image placeholder" class="avatar avatar-xl  " data-toggle="tooltip" data-original-title="" Logo="" src="">
-                            </a> -->
-                            
-                        </div>
 
                     </div>
                 </div>
@@ -213,7 +195,7 @@
             if(x < max_keys)
             {
                 x++;
-                $(wrapper).append('<div class="col-lg-12"> <div class="form-group"> {{ Form::label("post_title", "", ["class" => "form-control-label"]) }}{{ Form::text("post_title", "", ["class" => "form-control"]) }}</div><div class="form-group">{{ Form::label("post_title", "", ["class" => "form-control-label"]) }}{{ Form::text("post_title", "", ["class" => "form-control"]) }} </div> <a href="#" class="remove_field">Remove</a> </div>')
+                $(wrapper).append('<div class="col-lg-12"> <div class="form-group"> {{ Form::label("الوحدة", "", ["class" => "form-control-label"]) }}{{ Form::text("keyword[]", "", ["class" => "form-control"]) }}</div><div class="form-group">{{ Form::label("الوحدة تعرض", "", ["class" => "form-control-label"]) }}{{ Form::text("keyword_content[]", "", ["class" => "form-control"]) }} </div> <a href="#" class="remove_field">Remove</a> </div>')
             }
         });
 
@@ -237,7 +219,7 @@
             e.preventDefault();
             if (i < max_photo_field) {
                 i++;
-                $(photo_wrapper).append('<div class="col-md-2"> <div class="input-group"><span class="input-group-btn"><a id="uploadFile'+i+'" data-input="thumbnail'+i+'" data-preview="holder" class="btn btn-secondary"><i class="fa fa-picture-o"></i> اضافة صورة</a></span><input id="thumbnail'+i+'" class="form-control d-none" type="text" name="image[]"></div>  <a href="#" class="remove_photo_field">Remove</a> </div>');
+                $(photo_wrapper).append('<div class="col-md-2"> <div class="input-group"><span class="input-group-btn"><a id="uploadFile'+i+'" data-input="thumbnail'+i+'" data-preview="holder'+i+'" class="btn btn-secondary"><i class="fa fa-picture-o"></i> اضافة صورة</a></span><input id="thumbnail'+i+'" class="form-control d-none" type="text" name="images[]"></div>  <a href="#" class="remove_photo_field">Remove</a><div class="col-md-2"><div id="holder'+i+'"><img style="height: 5rem;" src="#"></div></div></div>');
                 $('#uploadFile'+i).filemanager('file');
             }
         });
