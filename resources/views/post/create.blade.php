@@ -237,7 +237,8 @@
             e.preventDefault();
             if (i < max_photo_field) {
                 i++;
-                $(photo_wrapper).append('<div class="col-md-2"> <div class="input-group"><span class="input-group-btn"><a id="uploadFile" data-input="thumbnail" data-preview="holder" class="btn btn-secondary"><i class="fa fa-picture-o"></i> اضافة صورة</a></span><input id="thumbnail" class="form-control d-none" type="text" name="featured_image"></div>  <a href="#" class="remove_photo_field">Remove</a> </div>');
+                $(photo_wrapper).append('<div class="col-md-2"> <div class="input-group"><span class="input-group-btn"><a id="uploadFile'+i+'" data-input="thumbnail'+i+'" data-preview="holder" class="btn btn-secondary"><i class="fa fa-picture-o"></i> اضافة صورة</a></span><input id="thumbnail'+i+'" class="form-control d-none" type="text" name="image[]"></div>  <a href="#" class="remove_photo_field">Remove</a> </div>');
+                $('#uploadFile'+i).filemanager('file');
             }
         });
 
